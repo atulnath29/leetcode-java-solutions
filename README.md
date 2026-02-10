@@ -63,47 +63,6 @@ Each solution file contains:
 
 ---
 
-## 📅 Daily Streak Tracker
-
-| Day | Problem                                        | Difficulty | Solution |
-| --- | ---------------------------------------------- | ---------- | -------- |
-| 1   | Two Sum                                        | Easy       | Java     |
-| 2   | Add Two Numbers                                | Medium     | Java     |
-| 3   | Longest Substring Without Repeating Characters | Medium     | Java     |
-
-*(Updating Daily…)*
-
----
-
-## 🧠 Example Solution Structure
-
-```java
-// Problem: Two Sum
-// Link: https://leetcode.com/problems/two-sum/
-// Difficulty: Easy
-
-import java.util.*;
-
-class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-
-        for (int i = 0; i < nums.length; i++) {
-            int diff = target - nums[i];
-
-            if (map.containsKey(diff)) {
-                return new int[]{map.get(diff), i};
-            }
-
-            map.put(nums[i], i);
-        }
-
-        return new int[]{};
-    }
-}
-```
-
----
 
 ## 🎯 My Goals
 
@@ -119,12 +78,15 @@ class Solution {
 | Difficulty | Solved |
 | ---------- | ------ |
 | Easy       | 0      |
-| Medium     | 0      |
-| Hard       | 0      |
+| Medium     | 1      |
+| Hard       | 1     |
 
 *(Auto-updated manually)*
 
 ---
+## 📊 Daily-Challenge
+| Streaks DAY :- 01 |
+
 
 ## 🌟 Why This Repo Matters
 

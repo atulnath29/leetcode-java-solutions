@@ -8,7 +8,7 @@ class Solution {
             for (int j = i; j < nums.length; j++){
                 int num = nums[j];
                 if ((num & 1) == 1) odd.add(num);
-                else even.add(num);
+                else even.add(num); 
                 if (odd.size() == even.size()){
                     res = Math.max(res, j - i + 1);
                 }

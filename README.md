@@ -111,7 +111,7 @@ If you find this helpful, feel free to ⭐ the repo.
 
 * GitHub: **atulnath29**
 * LeetCode: *(https://leetcode.com/u/atul__nath__29/)*
-
+* linkedin: *(https://www.linkedin.com/in/atul-nath-178b2a303?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BdSe%2FtgZRTOqbVvBdaKjKqA%3D%3D)*
 ---
 
 ### ⭐ Don’t forget to Star this Repository if you like it!

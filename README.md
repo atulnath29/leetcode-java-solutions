@@ -77,15 +77,15 @@ Each solution file contains:
 
 | Difficulty | Solved |
 | ---------- | ------ |
-| Easy       | 2      |
+| Easy       | 3      |
 | Medium     | 6      |
-| Hard       | 1      |
+| Hard       | 2      |
 
 *(Auto-updated manually)*
 
 ---
 ## 📊 Daily-Challenge
-| Streaks DAY :- 09 |
+| Streaks DAY :- 11 |
 
 
 ## 🌟 Why This Repo Matters

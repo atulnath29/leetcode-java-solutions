@@ -1,0 +1,28 @@
+class Solution {
+    public List<String> readBinaryWatch(int turnedOn) {
+        List<String> res = new ArrayList<>();
+        if(turnedOn > 8) return res;
+
+        for(int i=0; i<12; i++){
+            String curr = "";
+            int setBit = Integer.bitCount(i);
+            int remainingBit = 0;
+            if(setBit < turnedOn){
+                remainingBit = turnedOn - setBit;
+                curr += String.valueOf(i) + ":";
+            }else if(setBit == turnedOn){
+                res.add(String.valueOf(i) + ":00");
+                continue;
+            }else{
+                continue;
+            }
+
+            for(int j=0; j<60; j++){
+                if(Integer.bitCount(j) == remainingBit){
+                    res.add(curr + (j < 10 ? "0" : "") + j);
+                }
+            }
+        }
+        return res;
+    }
+}

@@ -1,0 +1,65 @@
+class Solution {
+    public boolean hasAlternatingBits(int n) {
+
+    // Using xor operator
+    // 101
+    // count++; 
+    // 1^0 = 1
+    // 0^1 = 1 = 2
+
+    // 1011
+    // 0+1+1 = 2
+
+    // 000101
+
+    // 1000101
+    // -5
+    // fail for negative numbers 
+
+    if(n==0 || n==1) return true;
+    int totalBits = 32 - Integer.numberOfLeadingZeros(n);
+    int count =0;
+    while(n!=0){
+
+          int current = n&1;
+          n = n>>1;
+
+          if((current^(n&1)) == 1)
+            count++;
+        
+    }
+
+    return (count == totalBits) ? true : false;
+
+
+
+    
+
+    // boolean set = false;
+    // boolean unset = false;
+
+    // if((n&1)==1) unset=true;
+    // if((n&1)==0) set=true;
+
+    // n = n>>1;
+
+    // while(n!=0){
+    
+    // int bit = n&1;
+
+    // if(bit==0&&unset){
+    //     set=true;
+    //     unset=false;
+    // }else if(bit==1&&set){
+    //     unset=true;
+    //     set=false;
+    // }else{
+    //     return false;
+    // }
+    //     n=n>>1;
+    // }
+
+    // return true;
+
+    }
+}

@@ -77,7 +77,7 @@ Each solution file contains:
 
 | Difficulty | Solved |
 | ---------- | ------ |
-| Easy       | 4      |
+| Easy       | 5      |
 | Medium     | 6      |
 | Hard       | 2      |
 
@@ -85,7 +85,7 @@ Each solution file contains:
 
 ---
 ## 📊 Daily-Challenge
-| Streaks DAY :- 12 |
+| Streaks DAY :- 13 |
 
 
 ## 🌟 Why This Repo Matters

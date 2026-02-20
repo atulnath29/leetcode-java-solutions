@@ -79,13 +79,13 @@ Each solution file contains:
 | ---------- | ------ |
 | Easy       | 5      |
 | Medium     | 6      |
-| Hard       | 2      |
+| Hard       | 3      |
 
 *(Auto-updated manually)*
 
 ---
 ## 📊 Daily-Challenge
-| Streaks DAY :- 13 |
+| Streaks DAY :- 14 |
 
 
 ## 🌟 Why This Repo Matters

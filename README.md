@@ -78,14 +78,14 @@ Each solution file contains:
 | Difficulty | Solved |
 | ---------- | ------ |
 | Easy       | 7      |
-| Medium     | 7      |
+| Medium     | 8      |
 | Hard       | 3      |
 
 *(Auto-updated manually)*
 
 ---
 ## 📊 Daily-Challenge
-| Streaks DAY :- 17 |
+| Streaks DAY :- 18 |
 
 
 ## 🌟 Why This Repo Matters

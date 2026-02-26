@@ -79,7 +79,7 @@ Each solution file contains:
 | ---------- | ------ |
 | Easy       | 9      |
 | Medium     | 11      |
-| Hard       | 3      |
+| Hard       | 5      |
 
 *(Auto-updated manually)*
 

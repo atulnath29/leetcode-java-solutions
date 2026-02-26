@@ -4,6 +4,12 @@ Welcome to my **LeetCode Java Solutions Repository** 👨‍💻
 
 This repository contains my **daily LeetCode problem solutions in Java**, uploaded consistently to maintain my coding streak and strengthen my Data Structures & Algorithms skills.
 
+
+---
+## 📊 Daily-Challenge
+| Streaks DAY :- 28 |
+
+
 ---
 
 ## 📊 Progress Tracker
@@ -13,12 +19,6 @@ This repository contains my **daily LeetCode problem solutions in Java**, upload
 | Easy       | 10      |
 | Medium     | 13      |
 | Hard       | 5      |
-
-*(Auto-updated manually)*
-
----
-## 📊 Daily-Challenge
-| Streaks DAY :- 28 |
 
 
 

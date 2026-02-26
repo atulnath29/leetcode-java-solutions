@@ -6,6 +6,24 @@ This repository contains my **daily LeetCode problem solutions in Java**, upload
 
 ---
 
+## 📊 Progress Tracker
+
+| Difficulty | Solved |
+| ---------- | ------ |
+| Easy       | 10      |
+| Medium     | 13      |
+| Hard       | 5      |
+
+*(Auto-updated manually)*
+
+---
+## 📊 Daily-Challenge
+| Streaks DAY :- 28 |
+
+
+
+
+
 ## 📌 About This Repository
 
 * 🔥 Daily LeetCode Streak Maintenance
@@ -72,21 +90,6 @@ Each solution file contains:
 * Maintain **365-Day Coding Streak**
 
 ---
-
-## 📊 Progress Tracker
-
-| Difficulty | Solved |
-| ---------- | ------ |
-| Easy       | 10      |
-| Medium     | 13      |
-| Hard       | 5      |
-
-*(Auto-updated manually)*
-
----
-## 📊 Daily-Challenge
-| Streaks DAY :- 28 |
-
 
 ## 🌟 Why This Repo Matters
 

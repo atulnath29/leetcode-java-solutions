@@ -78,7 +78,7 @@ Each solution file contains:
 | Difficulty | Solved |
 | ---------- | ------ |
 | Easy       | 9      |
-| Medium     | 11      |
+| Medium     | 13      |
 | Hard       | 5      |
 
 *(Auto-updated manually)*

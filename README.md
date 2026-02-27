@@ -7,18 +7,18 @@ This repository contains my **daily LeetCode problem solutions in Java**, upload
 
 ---
 ## 📊 Daily-Challenge
-| Streaks DAY :- 28 |
+| Streaks DAY :- 29 |
 
 
 ---
 
 ## 📊 Progress Tracker
 
-| Difficulty | Solved |
-| ---------- | ------ |
+| Difficulty |  Solved |
+| ---------- | ------- |
 | Easy       | 10      |
 | Medium     | 13      |
-| Hard       | 5      |
+| Hard       | 6       |
 
 
 

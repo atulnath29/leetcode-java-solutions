@@ -1,0 +1,26 @@
+class Solution {
+    int mod = 1_000_000_007;
+
+    public int concatenatedBinary(int n) {
+
+        long ans = 0;
+
+        for (int i = 1; i <= n; i++) {
+
+            int num = i;
+            int[] bits = new int[17];
+            int len = 0;
+
+            while (num > 0) {
+                bits[len++] = num % 2;
+                num /= 2;
+            }
+
+            for (int j = len - 1; j >= 0; j--) {
+                ans = (ans * 2 + bits[j]) % mod;
+            }
+        }
+
+        return (int) ans;
+    }
+}

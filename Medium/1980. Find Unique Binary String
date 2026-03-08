@@ -1,0 +1,22 @@
+class Solution {
+    public String findDifferentBinaryString(String[] nums) {
+        int n = nums.length;
+        HashSet<String> set = new HashSet<>();
+        for(String s : nums)
+            set.add(s);
+        int k = (int)Math.pow(2,n);
+        String res = "";
+        for(int i=0;i<k;i++)
+        {
+            String s = Integer.toBinaryString(i);
+            while(s.length() < n)
+                s = 0+s;
+            if(!set.contains(s))
+            {
+                res = s;
+                break;
+            }
+        }
+        return res;
+    }
+}

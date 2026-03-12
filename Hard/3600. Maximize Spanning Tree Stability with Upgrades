@@ -1,0 +1,44 @@
+class Solution {
+    public int maxStability(int n, int[][] e, int k) {
+        Arrays.sort(e, (o1,o2)->comp(o1,o2));
+
+        int[] p = new int[n];
+        for(int i=0; i<n; i++) p[i]=i;
+
+        int ei=0, p1, p2, pn=n, mumin=1_000_000;
+        for(; ei<e.length&&e[ei][3]==1; ei++){
+            p1=getPar(e[ei][0], p);
+            p2=getPar(e[ei][1], p);
+
+            if(p1==p2)return -1;
+            p[p2]=p1;
+            pn--;
+        }
+        if(ei>0)mumin=e[ei-1][2];
+        int[] st = new int[n]; int si=0;
+
+        for(; ei<e.length && pn>1; ei++){
+            p1=getPar(e[ei][0], p);
+            p2=getPar(e[ei][1], p);
+            if(p1==p2)continue;
+            p[p2]=p1;
+            pn--;
+            st[si++]=e[ei][2];
+        }
+        if(pn>1)return -1;
+        for(int i=1; i<=k; i++){
+            if(si<i)return mumin;
+            mumin = Math.min(mumin, st[si-i]<<1);
+        }
+        if(si>k)mumin = Math.min(mumin, st[si-k-1]);
+        return mumin;
+    }
+    private int getPar(int x, int[] p){
+        if(x==p[x])return x;
+        return p[x]=getPar(p[x], p);
+    }
+    private int comp(int[] o1, int[] o2){
+        if(o1[3]!=o2[3])return o2[3]-o1[3];
+        return o2[2]-o1[2];
+    }
+}

@@ -1,0 +1,91 @@
+class Fancy {
+    public class Pair{
+        int pos;
+        long mul;
+        long add;
+
+        Pair(int pos, long mul, long add){
+            this.pos = pos;
+            this.mul = mul;
+            this.add = add;
+        }
+    }
+
+    List<Integer> arr;
+    List<Pair> ops;
+    int mod = 1000000007;
+
+    public Fancy() {
+        arr = new ArrayList<>();
+        ops = new ArrayList<>();
+        ops.add(new Pair(-1, 1L, 0L));
+    }
+    
+    public void append(int val) {
+        arr.add(val);
+    }
+    
+    public void addAll(int inc) {
+        if(arr.size() == 0)
+            return;
+        Pair last = ops.get(ops.size() - 1);
+        ops.add(new Pair(arr.size(), last.mul, (last.add + inc) % mod));
+    }
+    
+    public void multAll(int m) {
+        if(arr.size() == 0)
+            return;
+        Pair last = ops.get(ops.size() - 1);
+        ops.add(new Pair(arr.size(), (last.mul * m) % mod, (last.add * m) % mod));
+    }
+    
+    public int getIndex(int idx) {
+        if(idx >= arr.size())
+            return -1;
+        Pair last = ops.get(ops.size() - 1);
+        if(last.pos <= idx)
+            return arr.get(idx);
+        int hi = ops.size() - 2;
+        int lo = 0;
+        int ans = hi;
+        while(lo <= hi){
+            int mid = (hi + lo) / 2;
+            if(ops.get(mid).pos <= idx){
+                ans = mid;
+                lo = mid + 1;
+            } else
+                hi = mid - 1;
+        }
+        Pair prev = ops.get(ans);
+        int num = arr.get(idx);
+        long mul = last.mul * modInverse(prev.mul) % mod;
+        long fans =  (mul * ((num - prev.add + mod) % mod)) % mod;
+        fans = (fans + last.add) % mod;
+        return (int)fans;
+    }
+
+    long modInverse(long x){
+        return modPow(x, mod - 2);
+    }
+
+    long modPow(long base, long exp){
+        long res = 1;
+        base %= mod;
+        while(exp > 0){
+            if((exp & 1) == 1)
+                res = (res * base) % mod;
+            base = (base * base) % mod;
+            exp >>= 1;
+        }
+        return res;
+    }
+}
+
+/**
+ * Your Fancy object will be instantiated and called as such:
+ * Fancy obj = new Fancy();
+ * obj.append(val);
+ * obj.addAll(inc);
+ * obj.multAll(m);
+ * int param_4 = obj.getIndex(idx);
+ */

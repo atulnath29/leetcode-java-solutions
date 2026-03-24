@@ -1,0 +1,44 @@
+class Solution {
+    public int[][] constructProductMatrix(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+
+        long[] pre = new long[row*col];
+        int ind = 0;
+        long prod = 1;
+        for(int i = 0;i < row;i++){
+            for(int j = 0;j < col;j++){
+                prod = (prod * grid[i][j])%12345;
+                pre[ind] = prod;
+                ind++;
+            }
+        }
+        
+        long[] suf = new long[row*col];
+        prod = 1;
+        ind = (row*col)-1;
+        for(int i = row-1;i >= 0;i--){
+            for(int j = col-1;j >= 0;j--){
+                prod = (prod * grid[i][j])%12345;
+                suf[ind] = prod;
+                ind--;
+            }
+        }
+        
+        int[][] res = new int[row][col];
+        ind = 0;
+        for(int i = 0;i < row;i++){
+            for(int j = 0;j < col;j++){
+                long pr = 1;
+                if(ind-1 >= 0) pr = pre[ind-1];
+                long sf = 1;
+                if(ind+1 < row*col) sf = suf[ind+1];
+                
+                res[i][j] = (int) (pr*sf)%12345;
+                ind++;
+            }
+        }
+        
+        return res;
+    }
+}

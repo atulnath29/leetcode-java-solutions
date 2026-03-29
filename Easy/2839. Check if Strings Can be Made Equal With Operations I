@@ -1,0 +1,30 @@
+class Solution {
+    public boolean canBeEqual(String s1, String s2) {
+        
+        if(s1.equals(s2)) return true;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(s1.charAt(2));
+        sb.append(s1.charAt(1));
+        sb.append(s1.charAt(0));
+        sb.append(s1.charAt(3));
+
+        if(sb.toString().equals(s2)) return true;
+
+        sb = new StringBuilder();
+        sb.append(s1.charAt(0));
+        sb.append(s1.charAt(3));
+        sb.append(s1.charAt(2));
+        sb.append(s1.charAt(1));
+        if(sb.toString().equals(s2)) return true;
+
+        sb = new StringBuilder();
+        sb.append(s1.charAt(2));
+        sb.append(s1.charAt(3));
+        sb.append(s1.charAt(0));
+        sb.append(s1.charAt(1));
+        if(sb.toString().equals(s2)) return true;
+
+        return false;
+    }
+}

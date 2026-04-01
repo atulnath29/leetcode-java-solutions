@@ -1,0 +1,102 @@
+class Pair {
+    int p;
+    int h;
+    char d;
+    int idx;
+    
+    public Pair(int p, int h, char d, int idx) {
+        this.p = p;
+        this.h = h;
+        this.d = d;
+        this.idx = idx;
+    }
+
+    public int getP() {
+        return this.p;
+    }
+
+    public int getH() {
+        return this.h;
+    }
+
+    public char getD() {
+        return this.d;
+    }
+
+    public int getIdx() {
+        return this.idx;
+    }
+}
+
+class Solution {
+    public List<Integer> survivedRobotsHealths(int[] positions, int[] healths, String directions) {
+        int numberOfRights = 0;
+        int numberOfLefts = 0;
+        for(char ch : directions.toCharArray()) {
+            if(ch == 'R') numberOfRights++;
+            else numberOfLefts++;
+        }
+
+        List<Integer> result = new ArrayList<>();
+        if(numberOfRights == directions.length() && numberOfLefts == 0) {
+            for(int element : healths) {
+                result.add(element);
+            }
+            return result;
+        }
+
+        if(numberOfLefts == directions.length() && numberOfRights == 0) {
+            for(int element : healths) {
+                result.add(element);
+            }
+            return result;
+        }
+
+        List<Pair> listOfAll = new ArrayList<>();
+        for(int i = 0; i < positions.length; i++) {
+            listOfAll.add(new Pair(positions[i], healths[i], directions.charAt(i), i));
+        }
+
+        listOfAll.sort(Comparator.comparingInt(Pair::getP));
+        
+        Stack<Pair> stack = new Stack<>();
+        boolean[] checkArray = new boolean[positions.length];
+        Arrays.fill(checkArray, true);
+
+        for(Pair pair : listOfAll) {
+            if(pair.getD() == 'R') {
+                stack.add(pair);
+            } else {
+                while(!stack.isEmpty()) {
+                    Pair prevPair = stack.peek();
+                    
+                    if(prevPair.getH() > pair.getH()) {
+                        healths[prevPair.getIdx()] = --prevPair.h;   // pre‑decrement
+                        checkArray[pair.getIdx()] = false;
+                        break;
+                    } else if (prevPair.getH() < pair.getH()) {
+                        healths[pair.getIdx()] = --pair.h;           // pre‑decrement
+                        checkArray[prevPair.getIdx()] = false;
+                        stack.pop();
+                    } else { // E case
+                        checkArray[pair.getIdx()] = false;
+                        checkArray[prevPair.getIdx()] = false;
+                        stack.pop();
+                        break;
+                    }
+                }
+            }
+        }
+        
+        int index = 0;
+        List<Integer> finalResult = new ArrayList<>();
+        for(boolean element : checkArray) {
+            if(element) {
+                finalResult.add(healths[index]);
+            }
+            index++;
+        }
+
+        return finalResult;
+    }
+}

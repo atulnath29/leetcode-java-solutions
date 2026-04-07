@@ -1,0 +1,69 @@
+class Solution {
+    public boolean isNumber(String s) {
+        String state = "q0";
+        int len = s.length();
+        for(int i=0; i<len; i++)
+        {
+            state = changeState(state, s.charAt(i));
+            if(state.equals("d")) return false;
+        }
+        if(state.equals("q1") || state.equals("q6") || state.equals("q4") || state.equals("q9"))
+        return true;
+        else return false;
+    }
+    private static String changeState(String st, char ch)
+    {
+        String state = "";
+        switch(st)
+        {
+            case "q0":
+                if((int)ch >= 48 && (int)ch <= 57) state = "q1";  // 0 - 9
+                else if(ch == '+' || ch == '-') state = "q3";  // + -
+                else if(ch == '.') state = "q7"; // .
+                else state = "d";
+            break;
+            case "q1":
+                if((int)ch >= 48 && (int)ch <= 57) state = "q1";  // 0 - 9
+                else if(ch == 'e' || ch == 'E') state = "q8";  // e
+                else if(ch == '.') state = "q4"; // .
+                else state = "d";
+            break;
+            case "q3":
+                if((int)ch >= 48 && (int)ch <= 57) state = "q1";  // 0 - 9
+                else if(ch == '.') state = "q7"; // .
+                else state = "d";
+            break;
+            case "q4":
+                if((int)ch >= 48 && (int)ch <= 57) state = "q6";  // 0 - 9
+                else if(ch == 'e' || ch == 'E') state = "q8"; // e
+                else state = "d";
+            break;
+            case "q6":
+                if((int)ch >= 48 && (int)ch <= 57) state = "q6";  // 0 - 9
+                else if(ch == 'e' || ch == 'E') state = "q8"; // e
+                else state = "d";
+            break;
+            case "q7":
+                if((int)ch >= 48 && (int)ch <= 57) state = "q6";  // 0 - 9
+                else state = "d";
+            break;
+            case "q8":
+                if((int)ch >= 48 && (int)ch <= 57) state = "q9";  // 0 - 9
+                else if(ch == '+' || ch == '-') state = "q10";  // + -
+                else state = "d";
+            break;
+            case "q9":
+                if((int)ch >= 48 && (int)ch <= 57) state = "q9";  // 0 - 9
+                else state = "d";
+            break;
+            case "q10":
+                if((int)ch >= 48 && (int)ch <= 57) state = "q9";  // 0 - 9
+                else state = "d";
+            break;
+            default:
+                System.out.println("In default!");
+                state = "q404";
+        }
+        return state;
+    }
+}

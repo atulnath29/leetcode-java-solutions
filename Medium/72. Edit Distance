@@ -1,0 +1,37 @@
+class Solution {
+    public int minDistance(String word1, String word2) {
+        int m = word1.length();
+        int n = word2.length();
+
+        // plus 1 for empty string
+       int[][] matrix = new int[m + 1][n + 1];
+
+       // intialization of empty string with 0 - 
+       // populate intial matrix by finding pattern of i and j
+       for(int i = 1; i <= m; i++) {
+        matrix[i][0] = i;
+       }
+
+       for(int j = 1; j <= n; j++) {
+        matrix[0][j] = j;
+       }
+       
+       // populate rest matrix
+       for(int i = 1; i <= m; ++i) {
+            for(int j = 1; j <= n; ++j) {
+            // copy from diagonal if same characters
+                if(word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                }
+            // for diff characters look for three sides and get minimum
+                else if(word1.charAt(i - 1) != word2.charAt(j - 1)) {
+                    int diagonal = matrix[i - 1][j - 1];
+                    int top = matrix[i - 1][j];
+                    int left = matrix[i][j - 1];
+                    matrix[i][j] = Math.min(diagonal, Math.min(top, left)) + 1;
+                }
+            }
+       }
+        return matrix[m][n];
+    }
+}

@@ -1,0 +1,17 @@
+class Solution {
+    public int furthestDistanceFromOrigin(String moves) {
+
+        int count = 0;
+        int blank = 0;
+        int n = moves.length();
+        for(int i = 0;i<n;i++) {
+            char val = moves.charAt(i);
+            if(val == 'R') count++;
+            else if(val == 'L') count--;
+            else blank++;
+        }
+
+        return count >= 0 ? count + blank : -1 * (count - blank); 
+        
+    }
+}

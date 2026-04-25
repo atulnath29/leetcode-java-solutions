@@ -1,0 +1,94 @@
+class Solution {
+    public int maxDistance(int side, int[][] points, int k) {
+        ArrayList<int[]>t=new ArrayList<>();
+        ArrayList<int[]>b=new ArrayList<>();
+        ArrayList<int[]>l=new ArrayList<>();
+        ArrayList<int[]>r=new ArrayList<>();
+        for(int[]it:points){
+            if(it[1]==0){
+            b.add(it);
+            }
+            else if(it[1]==side){
+                t.add(it);
+            }
+            else if(it[0]==side){
+                r.add(it);
+            }
+            else l.add(it);
+        }
+        Collections.sort(b,(aa,bb)->aa[0]-bb[0]);
+        Collections.sort(r,(aa,bb)->aa[1]-bb[1]);
+        Collections.sort(t,(aa,bb)->bb[0]-aa[0]);
+        Collections.sort(l,(aa,bb)->bb[1]-aa[1]);
+        long[]p=new long[points.length];
+        int i=0;
+        for(int[]it:b){
+           p[i++]=(long)((long)it[0]+(long)it[1]);
+        }
+        for(int[]it:r){
+            p[i++]=(long)((long)side+(long)it[1]);
+        }
+        for(int[]it:t){
+            p[i++]=(long)(2l*(long)side)+(long)((long)side-(long)it[0]);
+        }
+        for(int[]it:l){
+            p[i]=(long)(3l*(long)side)+(long)((long)side-(long)it[1]);
+             i++;
+        }
+        int rr=side;
+        int ll=1;
+        int ans=0;
+        while(ll<=rr){
+            int m=(ll+rr)/2;
+            if(f(m,p,k,side)){
+              ll=m+1;
+              ans=m;
+            }
+            else{
+             rr=m-1;
+             
+            }
+        }
+        return ans;
+        
+    }
+    public boolean f(int m,long[]p,int k,int side){
+        for(int i=0;i<p.length;i++){
+            int s=i;
+            int c=1;
+            int cc=s;
+            while(c<k){
+
+            int idx=ff(p,(long)((long)p[cc]+(long)m));
+            if(idx>=p.length)break;
+            if(p[s]+(long)(4l*(long)side)-p[idx]<m)break; 
+            c++;
+         //    System.out.println(s+" "+c+" "+idx+" "+(p[cc]+m)+" "+m);
+            cc=idx;
+            
+            }
+           
+            if(c==k)return true;
+        }
+        return false;
+    }
+    public int ff(long[]p,long t){
+        int l=0;
+        int r=p.length-1;
+        int ans=p.length;
+        while(l<=r){
+           int m=(l+r)/2;
+           if(p[m]<t){
+              
+               l=m+1;   
+           }
+           else{
+             ans=m;
+              r=m-1;
+           }
+        }
+     //   for(int i:p)System.out.println(i+" 1");
+     //   System.out.println(ans);
+        return ans;
+    }
+}

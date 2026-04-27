@@ -1,0 +1,77 @@
+class Solution {
+    public boolean hasValidPath(int[][] grid) {
+        HashMap<Integer,List<Character>> give=new HashMap<>();
+        HashMap<Integer,HashSet<Character>> take=new HashMap<>();
+        give.put(1,Arrays.asList('l','r'));
+        take.put(1,new HashSet<>(Arrays.asList('l','r')));
+        give.put(2,Arrays.asList('u','d'));
+        take.put(2,new HashSet<>(Arrays.asList('u','d')));
+        give.put(3,Arrays.asList('l','d'));
+        take.put(3,new HashSet<>(Arrays.asList('r','u')));
+        give.put(4,Arrays.asList('r','d'));
+        take.put(4,new HashSet<>(Arrays.asList('l','u')));
+        give.put(5,Arrays.asList('l','u'));
+        take.put(5,new HashSet<>(Arrays.asList('r','d')));
+        give.put(6,Arrays.asList('u','r'));
+        take.put(6,new HashSet<>(Arrays.asList('l','d')));
+        int[][] visited=new int[grid.length][grid[0].length];
+        visited[0][0]=1;
+        
+        return helper(give,take,0,0,visited,grid);
+    }
+    public boolean helper(HashMap<Integer,List<Character>> give,HashMap<Integer,HashSet<Character>> take,int row,int col,int[][] visited,int[][] grid){
+        if(row==grid.length-1 && col==grid[0].length-1){
+            return true;
+        }
+        boolean path1=false;
+        boolean path2=false;
+        List<Character> temp1=give.get(grid[row][col]);
+        char ch1=temp1.get(0);
+        if(ch1=='l'){
+            if(col>0 && (take.get(grid[row][col-1]).contains(ch1) && visited[row][col-1]!=1)){
+                visited[row][col-1]=1;
+                path1=helper(give,take,row,col-1,visited,grid);
+            }
+        }else if(ch1=='r'){
+            if(col<grid[0].length-1 && (take.get(grid[row][col+1]).contains(ch1) && visited[row][col+1]!=1)){
+                visited[row][col+1]=1;
+                path1=helper(give,take,row,col+1,visited,grid);
+            }
+        }else if(ch1=='u'){
+            if(row>0 && (take.get(grid[row-1][col]).contains(ch1) && visited[row-1][col]!=1)){
+                visited[row-1][col]=1;
+                path1=helper(give,take,row-1,col,visited,grid);
+            }
+        }else{
+            if(row<grid.length-1 && (take.get(grid[row+1][col]).contains(ch1) && visited[row+1][col]!=1)){
+                visited[row+1][col]=1;
+                path1=helper(give,take,row+1,col,visited,grid);
+            }
+        }
+        char ch2=temp1.get(1);
+        if(ch2=='l'){
+            if(col>0 && (take.get(grid[row][col-1]).contains(ch2) && visited[row][col-1]!=1)){
+                visited[row][col-1]=1;
+                path2=helper(give,take,row,col-1,visited,grid);
+            }
+        }else if(ch2=='r'){
+            if(col<grid[0].length-1 && (take.get(grid[row][col+1]).contains(ch2) && visited[row][col+1]!=1)){
+                visited[row][col+1]=1;
+                path2=helper(give,take,row,col+1,visited,grid);
+            }
+        }else if(ch2=='u'){
+            if(row>0 && (take.get(grid[row-1][col]).contains(ch2) && visited[row-1][col]!=1)){
+                visited[row-1][col]=1;
+                path2=helper(give,take,row-1,col,visited,grid);
+            }
+        }else{
+            if(row<grid.length-1 && (take.get(grid[row+1][col]).contains(ch2) && visited[row+1][col]!=1)){
+                visited[row+1][col]=1;
+                path2=helper(give,take,row+1,col,visited,grid);
+            }
+        }
+        return path1|| path2;
+
+        
+    }
+}

@@ -1,0 +1,34 @@
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        // Create dummy heads for left (<x) and right (>=x) partitions
+        ListNode leftHead = new ListNode(0); 
+        ListNode rightHead = new ListNode(0);
+        
+        // Initialize tails for left & right partitions
+        ListNode leftTail = leftHead;
+        ListNode rightTail = rightHead;
+
+        ListNode right = head; // Pointer to traverse original list
+
+        while (right != null) {
+            ListNode temp = right.next; // Store next node before modifying pointers
+            
+            if (right.val < x) {
+                // Append to left partition
+                leftTail.next = right;
+                leftTail = right;
+            } else {
+                // Append to right partition
+                rightTail.next = right;
+                rightTail = right;
+            }
+            
+            right = temp; // Move to the next node
+        }
+        
+        rightTail.next = null; // Terminate right partition to avoid cycles
+        leftTail.next = rightHead.next; // Merge left & right partitions
+        
+        return leftHead.next; // Return the new head (skipping dummy node)
+    }
+}

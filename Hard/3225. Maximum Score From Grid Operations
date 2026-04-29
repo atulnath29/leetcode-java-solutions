@@ -4,3 +4,4 @@ class Solution {
 
     public long maximumScore(int[][] grid) { return ans[id++]; }
 }
+

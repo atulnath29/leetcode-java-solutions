@@ -1,0 +1,40 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i=m-1;
+        int j=n-1;
+        int k=m+n-1;
+        /*  m=3
+            nums1 [1,2,3,0,0,0]
+            m-1 = [2]-> 3 our m-1 start from 3
+
+            n=3
+            nums2 [2,5,6]
+            n-1 = [2]-> 6 our n-1 starts from 6
+
+            since our nums[1] has a lenght of m+n
+            so k=m+n-1 that means 3+3=6-1=5 it'll start from 0:
+            the extreme end of nums1 that is 0 element at index 5
+        */
+        while(j>=0){
+
+            if(i>=0 && nums1[i]>nums2[j]){
+
+                /*  here we will compare that if our element:
+                    in nums1 > element in nums2
+                    -> if its true then:
+                    we will put the current value of nums1 in k
+                */
+                nums1[k]=nums1[i];
+                k--;
+                i--;
+            }   else{
+
+                /*  Otherwise, place nums2[j] at position k*/
+
+                nums1[k]=nums2[j];
+                k--;
+                j--;
+            }
+        }
+    }
+}

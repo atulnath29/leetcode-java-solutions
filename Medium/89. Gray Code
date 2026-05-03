@@ -1,0 +1,58 @@
+class Solution {
+    int limit;
+    List<Integer> ans;
+    boolean flg;
+    public List<Integer> grayCode(int n) {
+        ans = new ArrayList<>();
+        limit = (int) Math.pow(2, n);
+        flg = false;
+        
+        ArrayList<Integer> bit = new ArrayList<>(limit);
+        for(int i = 0;i < n;i++){
+            bit.add(0);
+        }
+        
+        HashSet<Integer> set = new HashSet<>();
+        set.add(0);
+        ArrayList<Integer> res = new ArrayList<>();
+        res.add(0);
+        maker(res, set, bit);
+
+        return ans;
+    }
+    public void maker(ArrayList<Integer> ord, Set<Integer> set, ArrayList<Integer> bit){
+        if(ord.size() == limit){
+            int one = 0;
+            for(int ele: bit) one += ele;
+            if(one == 1){
+                ans.addAll(ord);
+                flg = true;
+            }
+            return;
+        }
+        for(int i = 0;i < bit.size();i++){
+            int bt = bit.get(i);
+            int ans = bt == 1 ? 0 : 1;
+            bit.set(i, ans);
+            int dec = decimalConv(bit);
+            if(!set.contains(dec)){
+                set.add(dec);
+                ord.add(dec);
+                maker(ord, set, bit);
+                ord.remove(ord.size()-1);
+                set.remove(dec);
+            }
+            if(flg) return;
+            bit.set(i, bt);
+        }
+    }
+    public int decimalConv(List<Integer> bit){
+        int pow = 0;
+        int sum = 0;
+        for(int ele: bit){
+            sum += (ele * (int) Math.pow(2,pow++));
+        }
+
+        return sum;
+    }
+}

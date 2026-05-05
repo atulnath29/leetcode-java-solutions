@@ -7,7 +7,7 @@ This repository contains my **daily LeetCode problem solutions in Java**, upload
 
 ---
 ## 📊 Daily-Challenge
-| Streaks DAY :- 136 |
+| Streaks DAY :- 139 |
 
 
 ---
@@ -16,8 +16,8 @@ This repository contains my **daily LeetCode problem solutions in Java**, upload
 
 | Difficulty |  Solved |
 | ---------- | ------- |
-| Easy       | 29      |
-| Medium     | 80      |
+| Easy       | 30      |
+| Medium     | 82      |
 | Hard       | 27      |
 
 

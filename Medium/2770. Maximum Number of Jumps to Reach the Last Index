@@ -1,0 +1,21 @@
+class Solution {
+    // -target + nums[i] <= nums[j] <= target + nums[i]
+    public int maximumJumps(int[] nums, int target) {
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, -1);
+        dp[n - 1] = 0;
+        for(int i = n - 2; i >= 0; i--){
+            long lr = (long)nums[i] - target;
+            long rr = (long)nums[i] + target;
+            for(int j = i + 1; j < n; j++){
+                if(lr <= nums[j] && rr >= nums[j]){
+                    if(dp[j] != -1){
+                        dp[i] = Math.max(dp[i], 1 + dp[j]);
+                    }
+                }
+            }
+        }
+        return dp[0];
+    }
+}

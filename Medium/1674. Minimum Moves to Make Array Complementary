@@ -1,0 +1,58 @@
+class Solution {
+    public int minMoves(int[] nums, int limit) {
+        int n = nums.length;
+
+        // since limit>=nums[i], sum of pair lies in [2,limit*2]
+        int[] arr = new int[2*limit+2];
+
+        /* Now we will calculate for each pair, number of moves required to get each sum in [2,limit*2]
+            current pair = [x,y]
+            for sum = x+y , 0 moves
+            minimum sum with one move = min(x,y)+1, so for all sum <min(x,y)+1 we need 2 moves
+            maximum sum with one move = max(x,y)+limit, so we need 1 moves for min(x,y)+1<=sum<=max(x,y)+limit
+            and for sum>max(x,y)+limit, we need 2 moves
+
+            for given pair, the number line gets divided as follows
+            2....min(x,y)+1....x+y.....max(x,y)+limit....limit*2
+        */
+
+        // One way, but too many redundant operations
+        // for(int i=0;i<n/2;i++){
+        //     int a = nums[i], b = nums[n-1-i];
+        //     // 2 moves for [2,Math.min(a,b)+1)
+        //     arr[2]+=2;
+        //     arr[Math.min(a,b)+1]-=2;
+        //     // 1 moves for [Math.min(a,b)+1,a+b)
+        //     arr[Math.min(a,b)+1]++;
+        //     arr[a+b]--;
+        //     // 1 moves for [a+b+1,Math.max(a,b)+limit]
+        //     arr[a+b+1]++;
+        //     arr[Math.max(a,b)+limit+1]--;
+        //     //2 moves for [Math.max(a,b)+limit+1,limit*2]
+        //     arr[Math.max(a,b)+limit+1]+=2;
+        //     arr[2*limit+1]-=2;
+        // }
+
+        // line sweep , moves needed goes from 2->1->0->1->2
+        // here the starting value is 0, so minimum value will go to -n in case of 2 moves for all n/2 pairs
+        // so initial sum value need to be kept equal to n
+        for(int i=0;i<n/2;i++){
+            int a = nums[i], b = nums[n-1-i];
+            arr[Math.min(a,b)+1]--;
+            arr[a+b]--;
+            arr[a+b+1]++;
+            arr[Math.max(a,b)+limit+1]++;
+        }
+
+        // if we calculate prefix sum now, then pre[i] tells total number of moves for pair sum i
+        // but we want minimum moves, so take minimum
+
+        int moves = n, ans = Integer.MAX_VALUE;
+        for(int i=2;i<=limit*2;i++){
+            moves+=arr[i];
+            ans = Math.min(ans,moves);
+        }
+
+        return ans;
+    }
+}

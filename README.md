@@ -17,7 +17,7 @@ This repository contains my **daily LeetCode problem solutions in Java**, upload
 | Difficulty |  Solved |
 | ---------- | ------- |
 | Easy       | 33      |
-| Medium     | 7      |
+| Medium     | 93      |
 | Hard       | 28      |
 
 

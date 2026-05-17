@@ -1,0 +1,47 @@
+class Solution {
+    public boolean canReach(int[] arr, int start) {
+        
+        int n = arr.length;
+
+        // To keep track of visited indexes
+        boolean[] visited = new boolean[n];
+
+        // Queue for BFS
+        Queue<Integer> queue = new LinkedList<>();
+
+        // Start from given index
+        queue.offer(start);
+
+        while (!queue.isEmpty()) {
+
+            int current = queue.poll();
+
+            // If already visited, skip
+            if (visited[current]) {
+                continue;
+            }
+
+            // If value becomes 0, answer found
+            if (arr[current] == 0) {
+                return true;
+            }
+
+            // Mark as visited
+            visited[current] = true;
+
+            // Move left
+            int left = current - arr[current];
+            if (left >= 0) {
+                queue.offer(left);
+            }
+
+            // Move right
+            int right = current + arr[current];
+            if (right < n) {
+                queue.offer(right);
+            }
+        }
+
+        return false;
+    }
+}

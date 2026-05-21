@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();  // 📚 Create photo album for levels
+        traversal(root, 0, res);                      // 🎬 Start filming from level 0
+        return res;                                   // 🎁 Return the complete movie
+    }
+
+    public void traversal(TreeNode root, int lvl, List<List<Integer>> res) {
+        if (root == null) return;                     // 🚫 Empty scene - stop filming
+        
+        // 🎯 STEP 1: Prepare frame for current level
+        if (res.size() <= lvl) {
+            res.add(new ArrayList());                 // 📸 Add new photo frame if needed
+        }
+        
+        // 🎯 STEP 2: Capture current node in its level
+        res.get(lvl).add(root.val);                   // 👑 Place king/queen in their row
+        
+        // 🎯 STEP 3: Film next generation (recursively)
+        traversal(root.left, lvl + 1, res);           // 👶 Film left lineage
+        traversal(root.right, lvl + 1, res);          // 👶 Film right lineage
+    }
+}

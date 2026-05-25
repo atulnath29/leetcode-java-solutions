@@ -1,0 +1,60 @@
+class Solution {
+    public int minJumps(int[] arr) {
+        int n = arr.length;
+        boolean vis[] = new boolean[n];  // Track visited indices
+
+        // Map each value to all indices where it appears
+        Map<Integer, List<Integer>> m = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            m.computeIfAbsent(arr[i], k -> new ArrayList<>()).add(i);
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+        // Track values whose same-value jumps have already been processed
+        HashSet<Integer> s = new HashSet<>();
+
+        q.offer(0);
+        int jump = 0;
+        vis[0] = true;
+
+        // BFS: each level = one jump
+        while (!q.isEmpty()) {
+            int size = q.size();
+
+            while (size-- > 0) {
+                int curr = q.remove();
+
+                if (curr == n - 1) return jump;  // Reached last index
+
+                List<Integer> l = m.get(arr[curr]);
+
+                // Jump to adjacent indices
+                if (curr + 1 < n && !vis[curr + 1]) {
+                    q.offer(curr + 1);
+                    vis[curr + 1] = true;
+                }
+                if (curr - 1 >= 0 && !vis[curr - 1]) {
+                    q.offer(curr - 1);
+                    vis[curr - 1] = true;
+                }
+
+                // Skip same-value jumps if already processed for this value
+                // (avoids revisiting all duplicates repeatedly → key optimization)
+                if (s.contains(arr[curr])) continue;
+
+                // Jump to all indices with the same value
+                for (int i = 0; i < l.size(); i++) {
+                    if (vis[l.get(i)]) continue;
+                    q.offer(l.get(i));
+                    vis[l.get(i)] = true;
+                }
+
+                s.add(arr[curr]);  // Mark this value's group as fully explored
+            }
+
+            jump++;  // Increment after processing all nodes at current BFS level
+        }
+
+        return jump;
+    }
+}

@@ -1,0 +1,36 @@
+/**
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ */
+
+class Solution {
+    public int maxDepth(TreeNode root) {
+        // current node processing
+
+        int currentNode = 1;
+        if(root == null) return 0;
+
+        // leaf node - end point
+        if(root.left == null && root.right == null) return currentNode;
+
+        if(root.left == null) {
+            int right = maxDepth(root.right);
+            return right + currentNode;
+        }
+
+        if(root.right == null) {
+            int left = maxDepth(root.left);
+            return left + currentNode;
+        }
+
+        // recursion call - go to next node 
+        int leftChild = maxDepth(root.left);
+        int rightChild = maxDepth(root.right);
+
+        // while returning back to prev node - do the work
+        int maxChild = Math.max(leftChild, rightChild);
+        return maxChild + currentNode;
+    }
+}

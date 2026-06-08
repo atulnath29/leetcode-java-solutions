@@ -1,0 +1,33 @@
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        List<Integer> numSmaller = new ArrayList<>(); // Maintain smaller part
+        List<Integer> numEqual = new ArrayList<>(); // Maintain pivot part
+        List<Integer> numLarger = new ArrayList<>(); // Maintain Larger part
+
+        for(int num : nums){
+            if(num < pivot){
+                numSmaller.add(num);
+            } else if (num > pivot){
+                numLarger.add(num);
+            } else{
+                numEqual.add(num);
+            }
+        }
+        
+        // Fill again in array
+        int i = 0;
+        for (int num : numSmaller) {
+            nums[i++] = num;
+        }
+
+        for (int num : numEqual) {
+            nums[i++] = num;
+        }
+
+        for (int num : numLarger) {
+            nums[i++] = num;
+        }
+
+        return nums;
+    }
+}

@@ -13,6 +13,7 @@ class Solution {
             }
         }
 
+
         int[] res = new int[arr.length];
         int j = 0;
         for (int x : arr) {

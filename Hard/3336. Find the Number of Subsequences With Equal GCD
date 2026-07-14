@@ -1,0 +1,39 @@
+class Solution {
+    int MOD = 1000000007;
+    int count=0;
+    public int subsequencePairCount(int[] nums) {
+        int gcd1 = 0;
+        int gcd2 = 0;
+        int[][][] dp = new int[nums.length+1][201][201];
+        for(int each[][] : dp){
+            for(int each1[] : each){
+                Arrays.fill(each1,-1);
+            }
+        }
+        HashMap<String, Integer> hm = new HashMap<>();
+        return pair(gcd1, gcd2, nums, 0, dp);
+    }
+
+    public int pair(int gcd1, int gcd2, int[] nums, int i, int[][][] hm){
+        if(i!=0 && gcd1==gcd2 && gcd1!=-1) count++;
+        if(hm[i][gcd1][gcd2] != -1) return hm[i][gcd1][gcd2];
+        if(i==nums.length){
+            if(gcd1> 0 && gcd2>0 && gcd1==gcd2) return 1;
+            return 0;
+        }
+        int count=0;
+      
+        count=(count+pair(GCD(gcd1, nums[i]), gcd2, nums, i+1, hm))%MOD;
+        
+        count=(count+pair(gcd1, GCD(gcd2, nums[i]), nums, i+1, hm))%MOD;
+        
+        count=(count+pair(gcd1, gcd2, nums, i+1, hm))%MOD;
+        hm[i][gcd1][gcd2] = count;
+       
+        return count;
+    }
+
+    public int GCD(int a, int b){
+        return (b==0)? a: GCD(b, a % b);
+    }
+}

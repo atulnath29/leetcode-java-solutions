@@ -1,0 +1,7 @@
+class Solution {
+    public int minimumPushes(String word) {
+    int len = word.length();
+    int loop = len / 8, rem = len % 8;
+    return rem * (loop + 1) + (1 + loop) * loop / 2 * 8;
+}
+}

@@ -1,0 +1,20 @@
+class Solution {
+    public List<Integer> findMissingElements(int[] nums) {
+        Set<Integer> existing = new HashSet<>();
+        for (int num : nums) {
+            existing.add(num);
+        }
+        
+        int min = Collections.min(existing);
+        int max = Collections.max(existing);
+        
+        List<Integer> missing = new ArrayList<>();
+        for (int i = min; i <= max; i++) {
+            if (!existing.contains(i)) {
+                missing.add(i);
+            }
+        }
+        
+        return missing;
+    }
+}

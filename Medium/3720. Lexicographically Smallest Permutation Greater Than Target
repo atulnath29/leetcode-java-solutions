@@ -1,0 +1,56 @@
+class Solution {
+    public String lexGreaterPermutation(String s, String target) {
+        if(s.length()!=target.length()) return "";
+        int freq[]=new int[26];
+        for(char c:s.toCharArray()) freq[c-'a']++;
+        StringBuilder sb=new StringBuilder();
+        int n=target.length();
+        for(int i=0;i<n;i++){
+            int tc=target.charAt(i)-'a';
+            int j=tc;
+            int validIndex=-1;
+            while(j<26){
+                if(freq[j]==0){
+                    j++;
+                    continue;
+                };
+                if(j>tc||compute(i+1,j,target,n,freq)){
+                    validIndex=j;
+                    break;
+                }
+                // System.out.println(j);
+                j++;
+            }
+            if(validIndex==-1) return "";
+            sb.append((char)(validIndex+'a'));
+            // System.out.println(sb.toString());
+            freq[validIndex]--; 
+            if(validIndex!=tc){
+                for(int k=0;k<26;k++){
+                    while(freq[k]>0){
+                        sb.append((char)(k+'a'));
+                        freq[k]--;
+                    }
+                }
+                break;
+            }
+        }
+        return sb.toString();
+    }
+    public boolean compute(int i,int j,String target,int n,int[] freq){
+        int[] temp=freq.clone();
+        temp[j]--;
+        j=25;
+        while(i<n){
+            while(j>=0&&temp[j]<=0){
+                j--;
+            }
+            if(j<0) break;
+            if(j>target.charAt(i)-'a') return true;
+            else if(j<target.charAt(i)-'a') return false;
+            temp[j]--;
+            i++;
+        }
+        return false;
+    }
+}

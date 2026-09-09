@@ -8,7 +8,7 @@ public:
             long long lowerBound = i;
             ans += (upperBound - lowerBound + 1) * count;
             count++;
-        }
+        } 
         return ans;
     }
 };

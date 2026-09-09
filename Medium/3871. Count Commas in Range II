@@ -1,0 +1,14 @@
+class Solution {
+public:
+    long long countCommas(long long n) {
+        long long count = 1;
+        long long ans = 0;
+        for (long long i = 1000; i <= n; i *= 1000) {
+            long long upperBound = min(n, i * 1000 - 1);
+            long long lowerBound = i;
+            ans += (upperBound - lowerBound + 1) * count;
+            count++;
+        }
+        return ans;
+    }
+};

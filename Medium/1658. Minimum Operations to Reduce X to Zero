@@ -1,0 +1,29 @@
+class Solution {
+    public int minOperations(int[] nums, int x) {
+        int n=nums.length;
+        int sum = 0;
+        int sub_len = 0;// store max len of subarray left out
+        for(int i:nums) sum+=i;
+        sum -= x;// required sum of left out array
+        if(sum<0) return -1;
+        // if()
+        int left = 0;
+        int s =0;//sum of subarray
+        boolean check=false;
+        for(int right = 0;right < n;right++){
+            s += nums[right];
+
+            while(s>sum){
+                s-=nums[left++];
+            }
+
+            if(s==sum) {
+                sub_len = Math.max(sub_len , right -left + 1);
+                check = true;
+            }
+        }
+
+        if(!check) return -1;
+        return n - sub_len;
+    }
+}

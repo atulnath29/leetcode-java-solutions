@@ -1,0 +1,24 @@
+class Solution {
+    List<String> res = new ArrayList<>();
+    public void helper(int openBal, int closeBal, StringBuilder sb) {
+        if (openBal == 0 && closeBal == 0) { 
+            res.add(sb.toString());
+            return;
+        }
+        if (openBal > 0) { 
+            sb.append('(');
+            helper(openBal - 1, closeBal, sb);
+            sb.deleteCharAt(sb.length() - 1); 
+        }
+        if (closeBal > openBal) {
+            sb.append(')');
+            helper(openBal, closeBal - 1, sb);
+            sb.deleteCharAt(sb.length() - 1); 
+        }
+    }
+    public List<String> generateParenthesis(int n) {
+        StringBuilder sb = new StringBuilder();
+        helper(n, n, sb);
+        return res;
+    }
+}

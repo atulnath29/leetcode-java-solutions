@@ -1,0 +1,34 @@
+
+class Solution {
+    public Node connect(Node root) {
+        if (root == null) return null;
+
+        Node parent = root;
+
+        while (parent != null){
+            Node dummy = new Node(0);
+            Node temp = dummy;
+
+
+            while(parent != null){
+                if (parent.left != null){
+                    temp.next = parent.left;
+                    temp = temp.next;
+                }
+                if (parent.right != null){
+                    temp.next = parent.right;
+                    temp = temp.next;
+                }
+
+                parent = parent.next;
+            }
+
+            parent = dummy.next;
+            dummy = null;
+
+        }
+
+        return root;
+
+    }
+}

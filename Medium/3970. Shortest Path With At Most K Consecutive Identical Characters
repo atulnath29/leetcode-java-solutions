@@ -1,0 +1,60 @@
+class Solution {
+    public int shortestPath(int n, int[][] edges, String labels, int k) {
+        List<int[]>[] graph=new ArrayList[n];
+        for(int i=0;i<n;i++)
+        {
+            graph[i]=new ArrayList<>();
+        }
+        for(int [] e:edges)
+        {
+            graph[e[0]].add(new int[]{e[1],e[2]});
+        }
+        long INF=Long.MAX_VALUE/4;
+        long [][]distance=new long [n][k+1];
+        for(int i=0;i<n;i++)
+        {
+            Arrays.fill(distance[i],INF);
+        }
+        PriorityQueue<long []>pq=new PriorityQueue<>(Comparator.comparingLong(a->a[2]));
+        distance[0][1]=0;
+        pq.offer(new long[]{0,1,0});
+        while(!pq.isEmpty())
+        {
+            long []curr=pq.poll();
+            int u=(int)curr[0];
+            int run=(int)curr[1];
+            long cost=curr[2];
+            if(cost!=distance[u][run]){
+                continue;
+            }
+            if(u==n-1)
+            {
+                return (int)cost;
+            }
+            for(int []edge:graph[u])
+            {
+                int v=edge[0];
+                int w=edge[1];
+                int newRun;
+                if(labels.charAt(v)==labels.charAt(u))
+                {
+                    newRun=run+1;
+                }
+                else
+                {
+                    newRun=1;
+                }
+                if(newRun>k)
+                {
+                    continue;
+                }
+                long curr_cost=cost+w;
+                if(curr_cost<distance[v][newRun]){
+                    distance[v][newRun]=curr_cost;
+                    pq.offer(new long[]{v,newRun,curr_cost});
+                }
+            }
+        }
+        return -1;
+    }
+}

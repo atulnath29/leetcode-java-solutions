@@ -1,1 +1,62 @@
+class Solution {
+    public int minimizeSum(int[] nums) {
+        if(nums.length == 3){
+            return 0;
+        }
 
+        int max1 = nums[0];
+        int max2;
+        int max3;
+
+        if(nums[1]>max1){
+            max2 = max1;
+            max1 = nums[1];
+        }else{
+            max2 = nums[1];
+        }
+
+        if(nums[2]>max1){
+            max3 = max2;
+            max2 = max1;
+            max1 = nums[2];
+        }else if(nums[2]>max2){
+            max3 = max2;
+            max2 = nums[2];
+        }else{
+            max3 = nums[2];
+        }
+
+        int min1 = max3;
+        int min2 = max2;
+        int min3 = max1;
+
+        for(int i = 3; i < nums.length; i++){
+            int num = nums[i];
+            if(num >= max1){
+                max3 = max2;
+                max2 = max1;
+                max1 = num;
+            }else if (num >= max2){
+                max3 = max2;
+                max2 = num;
+            }else if (num > max3){
+                max3 = num;
+            }
+
+            if(num <= min1){
+                min3 = min2;
+                min2 = min1;
+                min1 = num;
+            }else if (num <= min2){
+                min3 = min2;
+                min2 = num;
+            }else if (num < min3){
+                min3 = num;
+            }
+        }
+        int method1 = max1 - min3;
+        int method2 = max3 - min1;
+        int method3 = max2 - min2;
+        return Math.min(method1, Math.min(method2, method3));
+    }
+}

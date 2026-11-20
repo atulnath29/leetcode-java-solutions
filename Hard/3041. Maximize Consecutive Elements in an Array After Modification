@@ -1,0 +1,48 @@
+class Solution {
+    public int maxSelectedElements(int[] nums) 
+    {
+        Arrays.sort(nums);
+        int maxElements = 1;
+        int currentElements = 1;
+        int lastElement = nums[0];
+        int doubleCount = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] - lastElement == 1) {
+                currentElements++;
+                lastElement = nums[i];
+            } else if (nums[i] - lastElement == 2) {
+                if (doubleCount == 1) {
+                    currentElements += 2;
+                    lastElement = nums[i];
+                    doubleCount = 0;
+                } else {
+                    currentElements += doubleCount;
+                    lastElement = nums[i];
+                    doubleCount = 0;
+                    maxElements = Math.max(maxElements, currentElements);
+                    currentElements = 2;
+                    int j = i - 2;
+                    while (j >= 0) {
+                        if (nums[j + 1] - nums[j] == 1) {
+                            currentElements++;
+                            j--;
+                        } else break;
+                    }
+                }
+            } else if (nums[i] - lastElement == 0) {
+                doubleCount = 1;
+            } else {
+                currentElements += doubleCount;
+                doubleCount = 0;
+                maxElements = Math.max(maxElements, currentElements);
+                currentElements = 1;
+                lastElement = nums[i];
+            }
+        }  
+        currentElements += doubleCount;
+        maxElements = Math.max(maxElements, currentElements);
+        return maxElements;
+        
+        
+    }
+}

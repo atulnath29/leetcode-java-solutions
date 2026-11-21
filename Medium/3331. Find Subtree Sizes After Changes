@@ -1,0 +1,59 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class Solution {
+    public int[] findSubtreeSizes(int[] parent, String s) {
+        int n = parent.length;
+        List<Integer>[] graph = new List[n];
+        List<Integer>[] newGraph = new List[n];
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<>();
+            newGraph[i] = new ArrayList<>();
+        }
+        for (int i = 1; i < n; i++) {
+            graph[parent[i]].add(i);
+        }
+        solve(graph, newGraph, 0, new HashMap<>(), s);
+
+        int[] result = new int[n];
+
+        solve(newGraph, 0, result);
+
+        return result;
+    }
+
+    private boolean solve(List<Integer>[] graph, List<Integer>[] newGraph, int current, Map<Character, Integer> map, String s) {
+
+        boolean result = true;
+        char c = s.charAt(current);
+        Integer old = map.get(c);
+        if (old != null) {
+            newGraph[old].add(current);
+            result = false;
+        }
+        map.put(c, current);
+        for (int child : graph[current]) {
+            if (solve(graph, newGraph, child, map, s)) {
+                newGraph[current].add(child);
+            }
+        }
+        map.remove(c);
+        if (old != null) {
+            map.put(c, old);
+        }
+        return result;
+    }
+
+    private int solve(List<Integer>[] graph, int current, int[] result) {
+
+        int count = 1;
+
+        for (int child : graph[current]) {
+            count += solve(graph, child, result);
+        }
+
+        return result[current] = count;
+    }
+}

@@ -1,0 +1,59 @@
+class Solution {
+    public int maximumSaleItems(int[][] items, int budget) {
+        int n = items.length;
+        int minprice = Integer.MAX_VALUE;
+        int maxfac = 0;
+        HashMap<Integer, Integer> fmap = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            fmap.put(items[i][0], fmap.getOrDefault(items[i][0], 0) + 1);
+            minprice = Math.min(minprice, items[i][1]);
+            maxfac = Math.max(maxfac, items[i][0]);
+        }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int key : fmap.keySet()) {
+            for (int j = key; j <= maxfac; j += key) {
+                map.put(key, map.getOrDefault(key, 0) + fmap.getOrDefault(j, 0));
+            }
+        }
+
+        PriorityQueue<pair> pq = new PriorityQueue<>((a, b) -> a.price - b.price);
+        for (int i = 0; i < n; i++) {
+            int factor = items[i][0];
+            int price = items[i][1];
+            int freq = map.get(factor) - 1;
+            if (freq > 0 && price > 0 && price < 2 * minprice)
+                pq.add(new pair(factor, price, freq));
+        }
+        int ans = 0;
+        while (!pq.isEmpty()) {
+            pair p = pq.poll();
+            int price = p.price;
+            int freq = p.freq;
+            int fac = p.factor;
+            int cantake = Math.min(budget / price, freq);
+            if (price > budget)
+                break;
+            budget -= price * cantake;
+            ans += 2 * cantake;
+        }
+
+        if (budget > 0) {
+            ans += budget / minprice;
+        }
+        return ans;
+
+    }
+
+}
+
+class pair {
+    int factor;
+    int price;
+    int freq;
+
+    public pair(int factor, int price, int freq) {
+        this.factor = factor;
+        this.price = price;
+        this.freq = freq;
+    }
+}
